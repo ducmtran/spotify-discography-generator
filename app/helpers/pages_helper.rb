@@ -1,8 +1,8 @@
 require 'rest-client'
 module PagesHelper
   def get_user(token_type, access_token)
-    uri = 'https://api.spotify.com/v1/me'
-    res = RestClient.get(uri, {authorization: "#{token_type} #{access_token}"})
+    url = 'https://api.spotify.com/v1/me'
+    res = RestClient.get(url, {authorization: "#{token_type} #{access_token}"})
 
     return JSON.parse(res.body)
   end
@@ -12,7 +12,7 @@ module PagesHelper
     prm = {
       'grant_type' => 'authorization_code',
       'code' => params['code'],
-      'redirect_uri' => 'http://127.0.0.1:3000/auth/callback',
+      'redirect_uri' => ENV['root_url'] + '/auth/callback',
       'client_id' => ENV['client_id'],
       'client_secret' => ENV['client_secret']
     }

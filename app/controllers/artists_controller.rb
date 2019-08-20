@@ -20,7 +20,7 @@ class ArtistsController < ApplicationController
       helpers.get_tracks_and_add_to_playlist(album['id'], playlist['id'])
     end
 
-    redirect_to home_path(), flash: { success: 'Playlist created'}
+    redirect_to home_path(), flash: { success: "Playlist '#{playlist['name']}' created!"}
   end
 
 end

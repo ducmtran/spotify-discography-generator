@@ -12,12 +12,10 @@ class PagesController < ApplicationController
     # token params contains access_token, token_type, scope, expires, refresh_token
     user_param = helpers.get_user('Bearer', session[:access_token])
     @name = user_param['display_name']
-    @id = user_param['id']
     @profile_image
     if user_param['images'].length > 0
       @profile_image = user_param['images'][0]['url']
     end
-    session[:user_id] = @id
   end
 
   def redirect_to_home
