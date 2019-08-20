@@ -1,12 +1,16 @@
 <div class="container">
 
 <div class="card">
-  <div class="card-body">
-    <h5 class="card-title"><%= @name %></h5>
-    <p class="card-text"><%= @email %></p>
-    <p class="card-text"><%= @id %></p>
+  <div class="row no-gutters">
+      <img class="card-img" src="<%= @profile_image %>" alt="" style="height: 100px; width: 100px">
+      <div class="card-body">
+        <h5 class="card-title">Welcome <span class="font-weight-bold"><%= @name %></span></h5>
+      </div>
   </div>
 </div>
+
+<h2>How it works</h2>
+<p>Search for your favorite artist below and click on the artist name. Check your Spotify library to see the playlist as "Discography - #artist-name"</p>
 
 <% if flash[:success] %>
   <div class="alert alert-success">
@@ -16,7 +20,7 @@
 
 <%= form_for :search, url: search_result_path(), method: :get do |f| %>
   <div class="field">
-    <%= f.text_field :query, placeholder: 'Search..', class: 'form-control' %>
+    <%= f.text_field :query, placeholder: 'Search artist', class: 'form-control' %>
   </div>
   <div class="actions">
     <%= f.submit :Search, class: 'btn btn-primary' %>
