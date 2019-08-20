@@ -8,3 +8,4 @@ load(local_env) if File.exists?(local_env)
 
 # Initialize the Rails application.
 Rails.application.initialize!
+
