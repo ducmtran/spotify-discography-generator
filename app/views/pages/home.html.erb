@@ -1,0 +1,26 @@
+<div class="container">
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title"><%= @name %></h5>
+    <p class="card-text"><%= @email %></p>
+    <p class="card-text"><%= @id %></p>
+  </div>
+</div>
+
+<% if flash[:success] %>
+  <div class="alert alert-success">
+    <%= flash[:success] %>
+  </div>
+<% end %>
+
+<%= form_for :search, url: search_result_path(), method: :get do |f| %>
+  <div class="field">
+    <%= f.text_field :query, placeholder: 'Search..', class: 'form-control' %>
+  </div>
+  <div class="actions">
+    <%= f.submit :Search, class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+</div>

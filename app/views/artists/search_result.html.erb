@@ -1,0 +1,9 @@
+<div class="list-group">
+<% @all_artists.each do |a| %>
+  <div class="list-group-item">
+    <%= link_to create_playlist_path(a['id']), method: :get do %>
+      <%= a['name'] %>
+    <% end %>
+  </div>
+<% end %>
+</div>

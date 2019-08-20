@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Spotify Discography Generator</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #9966ff;">
+    <div class="navbar-collapse collapse">
+      <ul class="navbar-nav mr-auto">
+        <%= link_to root_path(), class: "nav-item nav-link active" do %>
+          Spotify Discography Generator
+        <% end %>
+        <a href="" class="nav-item nav-link active">View source on GitHub</a>
+      </ul>
+    </div>
+  </nav>
+  
+  <body class="bg-light">
+    <div class="row">
+      <div class="col-lg-2 col-1"></div>
+      <div class="col-lg-8 col-10">
+        <%= yield %>
+      </div>
+      <div class="col-lg-2 col-1"></div>
+    </div>
+  </body>
+</html>
