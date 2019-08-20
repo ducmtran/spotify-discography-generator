@@ -2,6 +2,8 @@
 
 This is a simple rails application where an user can create a new discography playlist (all songs by an artist) to their spotify library
 
+Try it here https://spotify-discography-generator.herokuapp.com
+
 Running
 ------
 
