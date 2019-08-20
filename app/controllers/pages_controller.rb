@@ -11,6 +11,7 @@ class PagesController < ApplicationController
     end
     # token params contains access_token, token_type, scope, expires, refresh_token
     user_param = helpers.get_user('Bearer', session[:access_token])
+    session[:user_id] = user_param['id']
     @name = user_param['display_name']
     @profile_image
     if user_param['images'].length > 0
