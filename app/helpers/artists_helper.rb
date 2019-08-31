@@ -33,7 +33,7 @@ module ArtistsHelper
   end
 
   def get_albums(id)
-    url = "https://api.spotify.com/v1/artists/#{id}/albums?include_groups=album"
+    url = "https://api.spotify.com/v1/artists/#{id}/albums?include_groups=album&country=US"
     res = RestClient.get(url, {authorization: "Bearer #{session[:access_token]}"})
     
     return JSON.parse(res.body)['items']
