@@ -1,7 +1,6 @@
 class ArtistsController < ApplicationController
-  def show
-    spotify_user = RSpotify::User.new(response.env['omniauth.auth'])
-  end
+  include ArtistsHelper
+  include PagesHelper
   
   def search_result
     rlt = helpers.get_followed_artists(params['search']['query'])
@@ -10,15 +9,25 @@ class ArtistsController < ApplicationController
 
   def create_playlist
     artist_id = params[:id]
-    artist = helpers.get_artist(artist_id)
+    artist = get_artist(artist_id)
 
-    playlist = helpers.new_playlist(artist['name'])
+    playlist = new_playlist(artist['name'])
+    albums = get_all_albums_by_artist(artist_id)
 
-    albums = helpers.get_albums(artist_id)
+    track_uris = []
+    track_names = Set.new
 
     for album in albums do
-      helpers.get_tracks_and_add_to_playlist(album['id'], playlist['id'])
+      tracks = get_all_tracks_in_album(album['id'], playlist['id'])
+      for t in tracks do
+        if (!track_names.include?(t['name']))
+          track_uris.append(t['uri'])
+          track_names.add(t['name'])
+        end
+      end
     end
+
+    add_tracks_to_playlist(playlist['id'], track_uris)
 
     redirect_to home_path(), flash: { success: "Playlist '#{playlist['name']}' created!"}
   end

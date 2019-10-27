@@ -4,25 +4,35 @@
     <title>Spotify Discography Generator</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #9966ff;">
-    <div class="navbar-collapse collapse">
-      <ul class="navbar-nav mr-auto">
-        <%= link_to root_path(), class: "nav-item nav-link active" do %>
-          Spotify Discography Generator
-        <% end %>
-        <a href="" class="nav-item nav-link active">View source on GitHub</a>
-      </ul>
-    </div>
-  </nav>
   
-  <body class="bg-light container">
+  <body class="container-fluid p-0 bg-light">
+    <div class="navbar navbar-expand-lg navbar-light" style="background-color: white">
+      <%= link_to root_path(), class: "navbar-brand" do %>
+            Spotify Discography Generator
+      <% end %>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a href="" class="nav-item nav-link active">View source on GitHub</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  
     <div class="row">
       <div class="col-lg-2 col-1"></div>
       <div class="col-lg-8 col-10">
