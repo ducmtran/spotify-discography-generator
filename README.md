@@ -16,8 +16,8 @@ Running
 ```ruby
 # Local environment variables
 # Ignore from commiting in .gitignore
-ENV['client_id'] = #client_id here
-ENV['client_secret'] = #client_secret here
+SPOTIFY_CLIENT_ID = #client_id here
+SPOTIFY_CLIENT_SECRET = #client_secret here
 ENV['root_url'] = 'http://127.0.0.1:3000'
 ```
 

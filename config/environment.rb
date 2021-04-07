@@ -9,3 +9,5 @@ load(local_env) if File.exists?(local_env)
 # Initialize the Rails application.
 Rails.application.initialize!
 
+SPOTIFY_CLIENT_ID = ENV['SPOTIFY_CLIENT_ID']
+SPOTIFY_CLIENT_SECRET = ENV['SPOTIFY_CLIENT_SECRET']

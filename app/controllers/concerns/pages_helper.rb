@@ -13,8 +13,8 @@ module PagesHelper
       'grant_type' => 'authorization_code',
       'code' => params['code'],
       'redirect_uri' => ENV['root_url'] + '/auth/callback',
-      'client_id' => ENV['client_id'],
-      'client_secret' => ENV['client_secret']
+      'client_id' => SPOTIFY_CLIENT_ID,
+      'client_secret' => SPOTIFY_CLIENT_SECRET
     }
     res = Net::HTTP.post_form(uri, prm)
     return JSON.parse(res.body)
@@ -26,7 +26,7 @@ module PagesHelper
       'grant_type' => 'refresh_token',
       'refresh_token' => session[:refresh_token]
     }
-    auth_str = Base64.strict_encode64(ENV['client_id'] + ':' + ENV['client_secret'])
+    auth_str = Base64.strict_encode64(SPOTIFY_CLIENT_ID + ':' + SPOTIFY_CLIENT_SECRET)
     header = {
       authorization: "Basic #{auth_str}"
     }
