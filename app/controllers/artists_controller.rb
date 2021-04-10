@@ -3,33 +3,25 @@ class ArtistsController < ApplicationController
   include PagesHelper
   
   def search_result
-    rlt = helpers.get_followed_artists(params['search']['query'])
-    @all_artists = rlt['artists']['items']
+    @found_artists_by_name = search_artists(params['search']['query'])
   end
 
-  def create_playlist
-    artist_id = params[:id]
+  def create_discography
     artist = get_artist(artist_id)
+    tracks = get_all_tracks_by_artist(artist)
 
-    playlist = new_playlist(artist['name'])
-    albums = get_all_albums_by_artist(artist_id)
+    playlist_name = create_playlist(user_id, tracks, artist.name)
 
-    track_uris = []
-    track_names = Set.new
-
-    for album in albums do
-      tracks = get_all_tracks_in_album(album['id'], playlist['id'])
-      for t in tracks do
-        if (!track_names.include?(t['name']))
-          track_uris.append(t['uri'])
-          track_names.add(t['name'])
-        end
-      end
-    end
-
-    add_tracks_to_playlist(playlist['id'], track_uris)
-
-    redirect_to home_path(), flash: { success: "Playlist '#{playlist['name']}' created!"}
+    redirect_to home_path(), flash: { success: "#{playlist_name} created!" }
   end
 
+  private
+
+  def artist_id
+    params[:id]
+  end
+
+  def user_id
+    session[:user_id]
+  end
 end

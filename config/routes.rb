@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   
   root 'pages#welcome'
 
-  get 'auth', to: 'users#oauth'
-  get 'auth/callback', to: 'pages#redirect_to_home'
+  get 'auth/spotify', to: 'pages#auth'
+  get 'auth/spotify/callback', to: 'pages#home'
   get 'home', to: 'pages#home'
   get 'search_result', to: 'artists#search_result'
-  get 'create_playlist/:id', to: 'artists#create_playlist', as: 'create_playlist'
+  get 'create_discography/:id', to: 'artists#create_discography', as: 'create_discography'
 end

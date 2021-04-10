@@ -1,29 +1,39 @@
 class PagesController < ApplicationController
-  def welcome
-    if session[:expire]
-      redirect_to :home
-    end
-  end
+  before_action :require_login, only: :home
+
+  def welcome; end
 
   def home
-    if Time.now - Time.parse(session[:expire]) > 3300
-      helpers.refresh_access_token()
+    if session[:access_token].nil?
+      tokens = helpers.get_access_refresh_token
+      session[:access_token]  = tokens['access_token']
+      session[:refresh_token] = tokens['refresh_token']
+      session[:expire]        = Time.now
     end
-    # token params contains access_token, token_type, scope, expires, refresh_token
-    user_param = helpers.get_user('Bearer', session[:access_token])
-    session[:user_id] = user_param['id']
-    @name = user_param['display_name']
-    @profile_image
-    if user_param['images'].length > 0
-      @profile_image = user_param['images'][0]['url']
-    end
+
+    user_response = helpers.get_user(session[:access_token])
+    session[:user_id] = user_response['id']
+    @name             = user_response['display_name']
   end
 
-  def redirect_to_home
-    token_params = helpers.get_access_refresh_token()
-    session[:access_token] = token_params['access_token']
-    session[:refresh_token] = token_params['refresh_token']
-    session[:expire] = Time.now
-    redirect_to action: :home
+  def auth
+    url = 'https://accounts.spotify.com/authorize'
+    params = {
+      'client_id' => SPOTIFY_CLIENT_ID,
+      'response_type' => 'code',
+      'redirect_uri' => root_url + 'auth/spotify/callback',
+      'scope' => 'playlist-modify-public playlist-modify-private user-follow-read'
+    }
+    redirect_to "#{url}?#{params.to_query}"
+  end
+
+  private
+
+  def require_login
+    if session[:user_id].nil? && params['code'].nil?
+      redirect_to action: :welcome
+    elsif session[:expire] && Time.now - Time.parse(session[:expire]) > 3300
+      helpers.refresh_access_token
+    end
   end
 end

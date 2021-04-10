@@ -2,12 +2,12 @@
 require_relative 'application'
 require File.join(File.dirname(__FILE__), 'boot')
 
-# Load heroku vars from local file
-local_env = File.join(Rails.root, 'config', 'local_env.rb')
-load(local_env) if File.exists?(local_env)
+require 'omniauth'
+
+SPOTIFY_CLIENT_ID = ENV['SPOTIFY_CLIENT_ID']
+SPOTIFY_CLIENT_SECRET = ENV['SPOTIFY_CLIENT_SECRET']
 
 # Initialize the Rails application.
 Rails.application.initialize!
 
-SPOTIFY_CLIENT_ID = ENV['SPOTIFY_CLIENT_ID']
-SPOTIFY_CLIENT_SECRET = ENV['SPOTIFY_CLIENT_SECRET']
+RSpotify::authenticate(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET)
