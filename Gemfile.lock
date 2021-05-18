@@ -149,7 +149,7 @@ GEM
     parser (3.0.1.0)
       ast (~> 2.4.1)
     public_suffix (3.1.1)
-    puma (5.2.2)
+    puma (5.3.1)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
@@ -282,7 +282,7 @@ DEPENDENCIES
   duktape
   jbuilder (~> 2.5)
   omniauth-rails_csrf_protection (~> 1.0)
-  puma (~> 5.2)
+  puma (~> 5.3)
   rails (~> 6.1)
   rspotify
   sass-rails (~> 5.0)
